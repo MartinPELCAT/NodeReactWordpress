@@ -1,0 +1,10 @@
+$theme-colors: (
+    "info": tomato,
+    "danger": teal,
+);
+
+@function theme-color($key: "primary") {
+    @return map-get($theme-colors, $key);
+}
+
+@import './node_modules/bootstrap/scss/bootstrap.scss';
