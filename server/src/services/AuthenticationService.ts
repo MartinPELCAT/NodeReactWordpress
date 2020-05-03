@@ -1,11 +1,9 @@
 import { IUser } from "models/User";
-import AuthenticationDAO from '../dao/AuthenticationDAO';
 import UserDAO from '../dao/UserDAO';
 import { FilterQuery } from "mongoose";
 import { comparePassword } from "../utils/bcryptUtils";
 
 class AuthenticationService {
-    private authenticationDAO = AuthenticationDAO;
     private userDAO = UserDAO;
     public getCurrentUser(): Promise<IUser | null> {
         return new Promise((resolve, reject) => {
@@ -15,7 +13,7 @@ class AuthenticationService {
 
 
     public generateNewToken(user: IUser): Promise<IUser> {
-        return this.authenticationDAO.generateNewToken(user);
+        return this.userDAO.generateNewToken(user);
     }
 
     public findUserOrFail(condition: FilterQuery<IUser>, password: string): Promise<IUser> {

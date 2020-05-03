@@ -1,0 +1,16 @@
+.login-form {
+  background: #fff;
+  border: 1px solid #d4dfe7;
+  box-shadow: 0px 1px 2px 0px #e7edf3;
+  padding: 20px 24px 24px; }
+
+.login {
+  width: 500px;
+  margin: auto;
+  padding: 8% 0 0; }
+
+.login-page .container {
+  min-height: 100vh; }
+
+#root > .login-page {
+  background-color: #e9eff3; }

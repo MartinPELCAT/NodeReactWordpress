@@ -54,12 +54,12 @@ export default class AuthenticationController implements IControllerBase {
 
     private isLogged(req: Request, res: Response) {
         let token = req.signedCookies._UID;
-        if (!token) { return res.status(404).send({ isConnected: false }); }
+        if (!token) { return res.send({ isConnected: false }); }
 
         this.userService.findOneOrFail({ token: token }).then((user) => {
-            return res.status(200).send({ isConnected: true, user })
-        }).catch((err) => {
-            return res.status(404).send({ isConnected: false, message: "You can try to reconnect" })
+            return res.send({ isConnected: true, user })
+        }).catch(() => {
+            return res.send({ isConnected: false })
         })
     }
 

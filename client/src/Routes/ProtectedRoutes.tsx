@@ -22,7 +22,7 @@ export default class ProtectedRoutes extends Component<RouteComponentProps> {
                         </>
                     }
                     else {
-                        return <Redirect to={`${MP.LOGIN}?redirect=${this.props.location.pathname}`} />
+                        return <Redirect to={`${MP.LOGIN}?redirect=${encodeURI(this.props.location.pathname)}`} />
                     }
                 }}
             </SessionContext.Consumer>
