@@ -4,6 +4,8 @@ import ProtectedRoutes from './ProtectedRoutes';
 import Login from '../Pages/Login/Login';
 import { MP } from '../config/path';
 
+const GeneratedPage = lazy(() => import("../Pages/Generated"))
+
 
 export default class Routes extends Component<RouteComponentProps> {
     render() {
@@ -14,6 +16,7 @@ export default class Routes extends Component<RouteComponentProps> {
                         <Switch>
                             <Route exact path={`${MP.LOGIN}`} component={Login} />
                             <Route path={`${MP.ADMIN}`} component={ProtectedRoutes} />
+                            <Route path="/" component={GeneratedPage} />
                         </Switch>
                     </Router>
                 </Suspense >

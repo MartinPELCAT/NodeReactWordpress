@@ -1,5 +1,6 @@
-import { Response, Request, NextFunction } from "express";
+import { Response, Request, NextFunction, CookieOptions } from "express";
 import { IUser } from "models/User";
+import { addYears } from 'date-fns'
 
 export const clearSessionCookie = (req: Request, res: Response, next: NextFunction): void => {
     let token = req.signedCookies._UID;
@@ -7,6 +8,8 @@ export const clearSessionCookie = (req: Request, res: Response, next: NextFuncti
     next();
 }
 
-export const setSessionCookie = (res: Response, user: IUser): void => {
-    res.cookie("_UID", user.token, { httpOnly: true, signed: true })
+export const setSessionCookie = (res: Response, user: IUser, keepMeLogged: boolean): void => {
+    let cookieOptions: CookieOptions = { httpOnly: true, signed: true };
+    if (keepMeLogged) { cookieOptions.expires = addYears(new Date, 10); }
+    res.cookie("_UID", user.token, cookieOptions)
 }

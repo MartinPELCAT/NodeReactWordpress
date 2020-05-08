@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { Form, Button, Col, Container, Spinner, Alert } from 'react-bootstrap';
-import { Formik, FormikHelpers, FormikValues, FormikProps } from 'formik';
-import { object, string } from 'yup';
+import { Formik, FormikHelpers } from 'formik';
+import { object, string, boolean } from 'yup';
 import './login.scss';
 import Axios from "axios";
 import { RouteComponentProps } from "react-router-dom";
-import { redirectTo } from "../../Routes/RouteUtils";
+import { SessionContext } from "../../Contexts/SessionContext";
+import { ISessionContext } from "../../Contexts/SessionContext/SessionBeans";
+import { redirectTo } from "../../Utils/RouteUtils";
 
 const schema = object({
     email: string().required().email(),
     password: string().required(),
+    rememberMe: boolean()
 });
 
 interface LoginState {
@@ -17,6 +20,7 @@ interface LoginState {
 }
 
 export default class Login extends Component<RouteComponentProps, LoginState> {
+    context!: ISessionContext;
 
     constructor(props: RouteComponentProps) {
         super(props);
@@ -26,15 +30,17 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(formData: { email: any; password: string; }, actions: FormikHelpers<any>) {
+    handleSubmit(formData: { email: any; password: string; rememberMe: boolean }, actions: FormikHelpers<any>) {
         this.setState({ submitLogin: true });
-        Axios.post("/api/auth/login", { email: formData.email, password: formData.password }).then(({ data }) => {
-            this.setState({ submitLogin: false });
-            this.props.history.push(redirectTo(this.props.location));
-        }).catch((err) => {
-            actions.setStatus({ apiCall: "Wrong credentials" })
-            this.setState({ submitLogin: false });
-        })
+        Axios.post("/api/auth/login", { email: formData.email, password: formData.password, rememberMe: formData.rememberMe })
+            .then(({ data }) => {
+                this.context.changeAuthenticatedUser(data.user);
+                this.setState({ submitLogin: false });
+                this.props.history.push(redirectTo(this.props.location));
+            }).catch(() => {
+                actions.setStatus({ apiCall: "Identifiant ou mot de passe incorrect" })
+                this.setState({ submitLogin: false });
+            })
     }
 
     render() {
@@ -47,16 +53,16 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
                         initialValues={{
                             email: '',
                             password: '',
+                            rememberMe: false
                         }}
                         initialStatus={{
-                            apiCall: ''
+                            apiCall: '',
                         }}
                     >
                         {({
                             handleSubmit,
                             handleChange,
                             values,
-                            touched,
                             errors,
                             status,
                         }) =>
@@ -93,6 +99,11 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
                                                 </Form.Control.Feedback>
                                             </Form.Group>
                                         </Form.Row>
+                                        <Form.Row>
+                                            <Form.Group as={Col} controlId="login-rememberMe">
+                                                <Form.Check type='checkbox' label="Keep me in" onChange={handleChange} name="rememberMe" />
+                                            </Form.Group>
+                                        </Form.Row>
                                         {!!status.apiCall && <Alert variant='danger' >{status.apiCall}</Alert>}
                                         <Form.Row>
                                             <Form.Group as={Col}>
@@ -117,3 +128,5 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
         )
     }
 }
+
+Login.contextType = SessionContext;

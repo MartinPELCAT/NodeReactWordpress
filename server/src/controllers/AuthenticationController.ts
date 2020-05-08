@@ -26,9 +26,9 @@ export default class AuthenticationController implements IControllerBase {
     }
 
     private login(req: Request, res: Response) {
-        let { email, password } = req.body;
+        let { email, password, rememberMe } = req.body;
         this.authenticationService.findUserOrFail({ email: email }, password).then(user => {
-            setSessionCookie(res, user);
+            setSessionCookie(res, user, rememberMe);
             return res.send({ user, message: "You are now logged", sucess: true });
         }).catch((err: Error) => {
             return res.status(404).json({ message: err.message })

@@ -13,5 +13,5 @@ export interface ISessionContext {
 
 export const contextDefaultValue: ISessionContext = {
     authenticatedUser: {},
-    changeAuthenticatedUser: () => { }
+    changeAuthenticatedUser: (user: User): void => { }
 }
