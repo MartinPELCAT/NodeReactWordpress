@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, RouteComponentProps } from 'rea
 import ProtectedRoutes from './ProtectedRoutes';
 import Login from '../Pages/Login/Login';
 import { MP } from '../config/path';
+import FullScreenLoader from '../Components/FullScreenLoader';
 
 const GeneratedPage = lazy(() => import("../Pages/Generated"))
 
@@ -10,17 +11,15 @@ const GeneratedPage = lazy(() => import("../Pages/Generated"))
 export default class Routes extends Component<RouteComponentProps> {
     render() {
         return (
-            <>
-                <Suspense fallback={<> </>}>
-                    <Router>
-                        <Switch>
-                            <Route exact path={`${MP.LOGIN}`} component={Login} />
-                            <Route path={`${MP.ADMIN}`} component={ProtectedRoutes} />
-                            <Route path="/" component={GeneratedPage} />
-                        </Switch>
-                    </Router>
-                </Suspense >
-            </>
+            <Suspense fallback={<FullScreenLoader />}>
+                <Router>
+                    <Switch>
+                        <Route exact path={`${MP.LOGIN}`} component={Login} />
+                        <Route path={`${MP.ADMIN}`} component={ProtectedRoutes} />
+                        <Route path="/" component={GeneratedPage} />
+                    </Switch>
+                </Router>
+            </Suspense>
         );
     }
 }
