@@ -3,6 +3,7 @@ import './LeftSideMenu.scss';
 import { Drawer, Toolbar, List } from '@material-ui/core';
 import MenuBlock from '../MenuBlock/MenuBlock';
 import { Dashboard, PermMedia, Link as LinkIcon, FileCopy, Create, Comment, RateReview, FormatPaint, Person, Build, Settings } from '@material-ui/icons'
+import { PATH } from '../../../config/path';
 
 const drawerWidth = 240;
 
@@ -20,16 +21,16 @@ export default class LeftSideMenu extends Component {
                     aria-labelledby="nested-list-subheader"
                     style={{ width: drawerWidth }} >
                     <MenuBlock label="Tableau de bord" icon={<Dashboard />}>
-                        <MenuBlock label="Acceuil" to='/mp-admin' />
+                        <MenuBlock label="Acceuil" to={PATH.ADMIN} />
                         <MenuBlock label="Mes Commentaires" />
                         <MenuBlock label="Stats du site" />
                     </MenuBlock>
 
                     <MenuBlock label="Articles" icon={<Create />}>
-                        <MenuBlock label="Tous les articles" to="/mp-admin/articles" />
-                        <MenuBlock label="Ajouter" to="/mp-admin/articles/addArticle" />
-                        <MenuBlock label="Catégories" to="/mp-admin/articles/categories" />
-                        <MenuBlock label="Étiquettes" to="/mp-admin/articles/tags" />
+                        <MenuBlock label="Tous les articles" to={PATH.ARTICLE.DEFAULT} />
+                        <MenuBlock label="Ajouter" to={PATH.ARTICLE.ADD} />
+                        <MenuBlock label="Catégories" to={PATH.ARTICLE.CATEGORIES} />
+                        <MenuBlock label="Étiquettes" to={PATH.ARTICLE.TAGS} />
                     </MenuBlock>
 
                     <MenuBlock label="Médias" icon={<PermMedia />}>
