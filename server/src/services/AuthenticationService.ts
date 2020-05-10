@@ -1,7 +1,7 @@
-import { IUser } from "models/User";
-import UserDAO from '../dao/UserDAO';
+import { IUser } from "../models";
+import { UserDAO } from '../dao';
 import { FilterQuery } from "mongoose";
-import { comparePassword } from "../utils/bcryptUtils";
+import { comparePassword } from "../utils";
 
 class AuthenticationService {
     private userDAO = UserDAO;

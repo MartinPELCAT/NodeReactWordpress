@@ -1,5 +1,5 @@
 import { ExtractJwt } from 'passport-jwt';
-import { User } from '../models/User';
+import { User } from '../models';
 import { Request, Response, NextFunction } from 'express';
 
 

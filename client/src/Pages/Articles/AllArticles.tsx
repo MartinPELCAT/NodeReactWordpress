@@ -1,9 +1,54 @@
 import React, { Component } from 'react'
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, Checkbox, TableBody, Typography, Divider, Button, FormControl, Select } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import { PATH } from '../../config/path'
+import { TableRow, TableCell, Checkbox, Typography, Divider, Button } from '@material-ui/core'
+import { Link } from 'react-router-dom';
+import { PATH } from '../../config/path';
+import { Skeleton } from '@material-ui/lab';
+import GeneratedTable from '../../Components/GeneratedTable';
 
-export default class AllArticles extends Component {
+interface AllArticlesStates {
+    isLoading: boolean
+}
+
+export default class AllArticles extends Component<{}, AllArticlesStates> {
+    constructor(props: Readonly<{}>) {
+        super(props);
+        this.state = {
+            isLoading: true,
+        }
+    }
+
+    componentDidMount() {
+        //call API
+    }
+
+    getSkeleton() {
+        return Array(10).fill(0).map((e, i) => {
+            return (
+                <TableRow key={i}>
+                    <TableCell padding="checkbox"><Checkbox disabled /></TableCell>
+                    <TableCell><Skeleton /></TableCell>
+                    <TableCell size='small'><Skeleton /></TableCell>
+                    <TableCell size='small'><Skeleton /></TableCell>
+                    <TableCell size='small'><Skeleton /></TableCell>
+                    <TableCell size='small'><Skeleton /></TableCell>
+                </TableRow>
+            )
+        })
+    }
+
+    getDatas() {
+        return (
+            <TableRow>
+                <TableCell padding="checkbox"><Checkbox /></TableCell>
+                <TableCell>dasdsa</TableCell>
+                <TableCell>dsadsa</TableCell>
+                <TableCell>dsdasdsa</TableCell>
+                <TableCell>dsdasdsa</TableCell>
+                <TableCell>dsad</TableCell>
+            </TableRow>
+        )
+    }
+
     render() {
         return (
             <div className='all-article-page'>
@@ -12,30 +57,17 @@ export default class AllArticles extends Component {
                     <Button variant='outlined' color='primary' size='small' component={Link} to={PATH.ARTICLE.ADD}>Ajouter</Button>
                 </div>
                 <Divider variant='fullWidth' style={{ margin: '1em 0' }} />
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell padding="checkbox"><Checkbox /></TableCell>
-                                <TableCell >Titre</TableCell>
-                                <TableCell>Étiquettes</TableCell>
-                                <TableCell>Auteur</TableCell>
-                                <TableCell>Catégories</TableCell>
-                                <TableCell padding='none'>Date</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell padding="checkbox"><Checkbox /></TableCell>
-                                <TableCell>Article</TableCell>
-                                <TableCell>Mpelcat</TableCell>
-                                <TableCell>News</TableCell>
-                                <TableCell>Dshdjsak</TableCell>
-                                <TableCell padding='none'>12/12/12</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <GeneratedTable
+                    columns={[
+                        { label: 'Titre' },
+                        { label: 'Étiquettes', width: '15%' },
+                        { label: 'Auteur', width: '15%' },
+                        { label: 'Catégories', width: '15%' },
+                        { label: 'Date', width: '10%' }
+                    ]}
+                    datas={null}
+                    isLoading={true}
+                />
             </div >
         )
     }

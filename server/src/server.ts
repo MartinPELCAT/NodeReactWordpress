@@ -1,7 +1,7 @@
 import App from './app'
 import * as bodyParser from 'body-parser'
 import * as cors from 'cors';
-import AuthenticationController from './controllers/AuthenticationController';
+import { ArticleController, AuthenticationController } from './controllers'
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as CookieParser from 'cookie-parser';
@@ -9,7 +9,8 @@ import * as CookieParser from 'cookie-parser';
 const app = new App({
     port: 1604,
     controllers: [
-        new AuthenticationController()
+        new AuthenticationController(),
+        new ArticleController(),
     ],
     middleWares: [
         bodyParser.json(),

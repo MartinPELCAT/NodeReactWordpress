@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction, CookieOptions } from "express";
-import { IUser } from "models/User";
+import { IUser } from "../models";
 import { addYears } from 'date-fns'
 
 export const clearSessionCookie = (req: Request, res: Response, next: NextFunction): void => {

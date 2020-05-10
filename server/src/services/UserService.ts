@@ -1,8 +1,8 @@
-import { IUser } from "../models/User";
-import UserDAO from '../dao/UserDAO'
+import { IUser } from "../models";
+import { UserDAO } from '../dao'
 import { FilterQuery } from "mongoose";
 import { Promise } from "bluebird";
-import { hashPassword } from "../utils/bcryptUtils";
+import { hashPassword } from "../utils";
 
 class UserService {
 

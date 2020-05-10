@@ -1,16 +1,12 @@
-import * as express from 'express';
 import IControllerBase from '../interfaces/IControllerBase.interface';
-import { Request, Response } from 'express'
-import { IUser } from '../models/User';
-import * as _ from 'lodash';
-import AuthenticationService from '../services/AuthenticationService';
-import UserService from '../services/UserService'
-import { isValidBody } from '../utils/RequestParameters';
-import { setSessionCookie, clearSessionCookie } from '../utils/CookieUtils';
+import { Request, Response, Router } from 'express'
+import { IUser } from '../models';
+import { AuthenticationService, UserService } from "../services";
+import { isValidBody, setSessionCookie, clearSessionCookie } from '../utils';
 
 export default class AuthenticationController implements IControllerBase {
     public controllerPath = '/auth';
-    public router = express.Router();
+    public router = Router();
     private authenticationService = AuthenticationService;
     private userService = UserService;
 
