@@ -14,7 +14,6 @@ interface GeneratedTableProps {
     isLoading: boolean
 }
 
-
 export default class GeneratedTable extends Component<GeneratedTableProps> {
 
     getSkeleton() {
@@ -42,7 +41,6 @@ export default class GeneratedTable extends Component<GeneratedTableProps> {
                 </TableRow>
             )
         }
-
     }
 
     render() {
@@ -52,9 +50,9 @@ export default class GeneratedTable extends Component<GeneratedTableProps> {
                     <TableHead>
                         <TableRow >
                             <TableCell padding="checkbox"><Checkbox disabled={this.props.isLoading} /></TableCell>
-                            {this.props.columns.map((col) => {
-                                if (!!col.width) { return <TableCell style={{ width: col.width }}>{col.label}</TableCell> }
-                                return <TableCell>{col.label}</TableCell>
+                            {this.props.columns.map((col, i) => {
+                                if (!!col.width) { return <TableCell key={`${col}-${i}`} style={{ width: col.width }}>{col.label}</TableCell> }
+                                return <TableCell key={`${col}-${i}`}>{col.label}</TableCell>
                             })}
                         </TableRow>
                     </TableHead>
