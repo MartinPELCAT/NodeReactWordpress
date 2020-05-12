@@ -5,6 +5,7 @@ import { CircularProgress, CssBaseline } from '@material-ui/core';
 import ArticlesRoutes from '../../Routes/ArticlesRoutes';
 import Error404 from '../404/Error404';
 import { PATH } from '../../config/path';
+import PagesRoutes from '../../Routes/PagesRoutes';
 
 export default class AdminPage extends Component<RouteComponentProps> {
     render() {
@@ -14,6 +15,7 @@ export default class AdminPage extends Component<RouteComponentProps> {
                 <Suspense fallback={<CircularProgress />}>
                     <Switch>
                         <Route path={PATH.ARTICLE.DEFAULT} component={ArticlesRoutes} />
+                        <Route path={PATH.PAGES.DEFAULT} component={PagesRoutes} />
                         <Route exact path={this.props.match.path}> Admin Page / </Route>
                         <Route component={Error404} />
                     </Switch>

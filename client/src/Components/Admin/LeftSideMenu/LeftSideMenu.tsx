@@ -45,8 +45,8 @@ export default class LeftSideMenu extends Component {
                     </MenuBlock>
 
                     <MenuBlock label="Pages" icon={<FileCopy />}>
-                        <MenuBlock label="Toutes les pages" />
-                        <MenuBlock label="Ajouter" />
+                        <MenuBlock label="Toutes les pages" to={PATH.PAGES.DEFAULT} />
+                        <MenuBlock label="Ajouter" to={PATH.PAGES.DEFAULT} />
                     </MenuBlock>
                     {/* todo at the end */}
                     <MenuBlock label="Commentaires" icon={<Comment />} />
