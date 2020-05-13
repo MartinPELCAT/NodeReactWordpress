@@ -8,7 +8,8 @@ interface MenuBlockProps {
     label: string,
     icon?: ReactNode,
     opened?: boolean,
-    to?: string
+    to?: string,
+    menuParrentUrl?: string
 }
 
 interface MenuBlockState {
@@ -20,6 +21,12 @@ export default class MenuBlock extends Component<MenuBlockProps, MenuBlockState>
         super(props);
         this.state = {
             opened: this.props.opened || false,
+        }
+    }
+
+    componentDidMount() {
+        if (!!this.props.menuParrentUrl && (window.location.pathname.includes(this.props.menuParrentUrl))) {
+            this.setState({ opened: true });
         }
     }
 

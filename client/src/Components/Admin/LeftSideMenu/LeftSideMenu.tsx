@@ -20,13 +20,13 @@ export default class LeftSideMenu extends Component {
                     component="nav"
                     aria-labelledby="nested-list-subheader"
                     style={{ width: drawerWidth }} >
-                    <MenuBlock label="Tableau de bord" icon={<Dashboard />}>
-                        <MenuBlock label="Acceuil" to={PATH.ADMIN} />
+                    <MenuBlock label="Tableau de bord" icon={<Dashboard />} menuParrentUrl={PATH.DASHBOARD.DEFAULT}>
+                        <MenuBlock label="Acceuil" to={PATH.DASHBOARD.DEFAULT} />
                         <MenuBlock label="Mes Commentaires" />
                         <MenuBlock label="Stats du site" />
                     </MenuBlock>
 
-                    <MenuBlock label="Articles" icon={<Create />}>
+                    <MenuBlock label="Articles" icon={<Create />} menuParrentUrl={PATH.ARTICLE.DEFAULT} >
                         <MenuBlock label="Tous les articles" to={PATH.ARTICLE.DEFAULT} />
                         <MenuBlock label="Ajouter" to={PATH.ARTICLE.ADD} />
                         <MenuBlock label="Catégories" to={PATH.ARTICLE.CATEGORIES} />
@@ -38,15 +38,15 @@ export default class LeftSideMenu extends Component {
                         <MenuBlock label="Ajouter" />
                     </MenuBlock>
 
-                    <MenuBlock label="Liens" icon={<LinkIcon />}>
-                        <MenuBlock label="Tous les liens" />
-                        <MenuBlock label="Ajouter" />
-                        <MenuBlock label="Catégories de liens" />
+                    <MenuBlock label="Liens" icon={<LinkIcon />} menuParrentUrl={PATH.LINKS.DEFAULT}  >
+                        <MenuBlock label="Tous les liens" to={PATH.LINKS.DEFAULT} />
+                        <MenuBlock label="Ajouter" to={PATH.LINKS.ADD} />
+                        <MenuBlock label="Catégories de liens" to={PATH.LINKS.CATEGORIES} />
                     </MenuBlock>
 
                     <MenuBlock label="Pages" icon={<FileCopy />}>
                         <MenuBlock label="Toutes les pages" to={PATH.PAGES.DEFAULT} />
-                        <MenuBlock label="Ajouter" to={PATH.PAGES.DEFAULT} />
+                        <MenuBlock label="Ajouter" to={PATH.PAGES.ADD} />
                     </MenuBlock>
                     {/* todo at the end */}
                     <MenuBlock label="Commentaires" icon={<Comment />} />
