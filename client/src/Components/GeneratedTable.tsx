@@ -10,7 +10,7 @@ interface ColumnProps {
 
 interface GeneratedTableProps {
     columns: Array<ColumnProps>,
-    datas: object | null,
+    datas: Array<object> | null,
     isLoading: boolean
 }
 
@@ -30,7 +30,7 @@ export default class GeneratedTable extends Component<GeneratedTableProps> {
     }
 
     getDatas() {
-        if (!(this.props.datas && (this.props.columns.length === Object.keys(this.props.datas).length))) {
+        if (!(this.props.datas && (this.props.columns.length === Object.keys(this.props.datas[0]).length))) {
             return (
                 <TableRow style={{ backgroundColor: 'rgb(253, 236, 234)', color: 'rgb(97, 26, 21)' }} >
                     <TableCell> <Warning /> </TableCell>
@@ -40,6 +40,18 @@ export default class GeneratedTable extends Component<GeneratedTableProps> {
                     })}
                 </TableRow>
             )
+        } else {
+            return this.props.datas.map((e: Object) => {
+                let values = Object.values(e);
+                return (
+                    <TableRow key={values[0]}>
+                        <TableCell><Checkbox /></TableCell>
+                        {values.map((data, index) => {
+                            return <TableCell key={`${data}-${index}`}>{data}</TableCell>
+                        })}
+                    </TableRow>
+                )
+            })
         }
     }
 

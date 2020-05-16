@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { FormControl, TextField, Typography, Select, Box, Button, FormHelperText } from '@material-ui/core'
 import { Form } from 'react-bootstrap';
@@ -11,7 +11,9 @@ const schema = yup.object({
 });
 
 interface Props {
-    onSubmit(): void
+    onSubmit(
+        values: { name: string, parentCategorie: string, description: string },
+        formikHelper: FormikHelpers<any>): void
 }
 
 export default class ArticlesCategoriesForm extends Component<Props> {
@@ -57,7 +59,7 @@ export default class ArticlesCategoriesForm extends Component<Props> {
                                     error={!!errors.parentCategorie}
                                     value={values.parentCategorie}
                                 >
-                                    <option aria-label="Catégorie Parente" value="">Aucune</option>
+                                    <option aria-label="Catégorie Parente">Aucune</option>
                                     <option value={10}>Catégorie 1</option>
                                     <option value={20}>Catégorie 2</option>
                                 </Select>
