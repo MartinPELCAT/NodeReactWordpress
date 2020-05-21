@@ -25,10 +25,10 @@ export default class AllLinks extends Component<{}, AllLinksStates> {
                 <PageTitle text="Liens" button={{ buttonLabel: "Ajouter", buttonUrl: PATH.PAGES.ADD }} />
                 <GeneratedTable
                     columns={[
-                        { label: 'Nom' },
-                        { label: 'URL', width: '30%' },
-                        { label: 'Categorie', width: '20%' },
-                        { label: 'Utilisation', width: '10%' }
+                        { name: 'name', label: 'Nom' },
+                        { name: 'URL', label: 'URL', width: '30%' },
+                        { name: 'categorie', label: 'Categorie', width: '20%' },
+                        { name: 'inUse', label: 'Utilisation', width: '10%' }
                     ]}
                     datas={null}
                     isLoading={true}

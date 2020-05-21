@@ -25,9 +25,9 @@ export default class AllPages extends Component<{}, AllPagesStates> {
                 <PageTitle text="Pages" button={{ buttonLabel: "Ajouter", buttonUrl: PATH.PAGES.ADD }} />
                 <GeneratedTable
                     columns={[
-                        { label: 'Titre' },
-                        { label: 'Auteur', width: '20%' },
-                        { label: 'Date', width: '20%' }
+                        { name: 'title', label: 'Titre' },
+                        { name: 'author', label: 'Auteur', width: '20%' },
+                        { name: 'date', label: 'Date', width: '20%' }
                     ]}
                     datas={null}
                     isLoading={true}

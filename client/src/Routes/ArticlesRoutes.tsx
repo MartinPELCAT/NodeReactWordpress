@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Switch, Route, RouteComponentProps } from 'react-router-dom'
-import '../Views/Articles/articles.scss'
 import Error404 from '../Views/404/Error404'
 import AllArticles from '../Views/Articles/AllArticles'
 import { PATH } from '../config/path';

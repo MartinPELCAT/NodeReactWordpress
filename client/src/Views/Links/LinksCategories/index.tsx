@@ -19,9 +19,9 @@ export default class LinksCategories extends Component {
                     <Grid item md={8}>
                         <GeneratedTable
                             columns={[
-                                { label: 'Nom' },
-                                { label: 'Description', width: '30%' },
-                                { label: 'Liens', width: '15%' }
+                                { name: 'name', label: 'Nom' },
+                                { name: 'description', label: 'Description', width: '30%' },
+                                { name: 'links', label: 'Liens', width: '15%' }
                             ]}
                             datas={null}
                             isLoading={true}

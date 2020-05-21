@@ -25,11 +25,11 @@ export default class AllArticles extends Component<{}, AllArticlesStates> {
                 <PageTitle text="Articles" button={{ buttonLabel: "Ajouter", buttonUrl: PATH.ARTICLE.ADD }} />
                 <GeneratedTable
                     columns={[
-                        { label: 'Titre' },
-                        { label: 'Étiquettes', width: '15%' },
-                        { label: 'Auteur', width: '15%' },
-                        { label: 'Catégories', width: '15%' },
-                        { label: 'Date', width: '10%' }
+                        { name: 'title', label: 'Titre' },
+                        { name: 'tags', label: 'Étiquettes', width: '15%' },
+                        { name: 'author', label: 'Auteur', width: '15%' },
+                        { name: 'categories', label: 'Catégories', width: '15%' },
+                        { name: 'date', label: 'Date', width: '10%' }
                     ]}
                     datas={null}
                     isLoading={true}

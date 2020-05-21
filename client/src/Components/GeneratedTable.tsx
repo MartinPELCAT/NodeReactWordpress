@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, Checkbox, TableBody } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
-import { Warning } from '@material-ui/icons'
 
 interface ColumnProps {
+    name: string,
     label: string,
     width?: string,
 }
@@ -30,24 +30,13 @@ export default class GeneratedTable extends Component<GeneratedTableProps> {
     }
 
     getDatas() {
-        if (!(this.props.datas && (this.props.columns.length === Object.keys(this.props.datas[0]).length))) {
-            return (
-                <TableRow style={{ backgroundColor: 'rgb(253, 236, 234)', color: 'rgb(97, 26, 21)' }} >
-                    <TableCell> <Warning /> </TableCell>
-                    <TableCell>Incorrect datas</TableCell>
-                    {Array(this.props.columns.length - 1).fill(0).map((el, index) => {
-                        return <TableCell key={`incorrect-${index}`}></TableCell>
-                    })}
-                </TableRow>
-            )
-        } else {
-            return this.props.datas.map((e: Object) => {
-                let values = Object.values(e);
+        if (!!this.props.datas) {
+            return this.props.datas.map((data: any) => {
                 return (
-                    <TableRow key={values[0]}>
-                        <TableCell><Checkbox /></TableCell>
-                        {values.map((data, index) => {
-                            return <TableCell key={`${data}-${index}`}>{data}</TableCell>
+                    <TableRow key={data.id}>
+                        <TableCell padding="checkbox"><Checkbox /></TableCell>
+                        {this.props.columns.map((column, columIndex) => {
+                            return <TableCell key={`${data}-${columIndex}`}>{data[column.name]}</TableCell>
                         })}
                     </TableRow>
                 )

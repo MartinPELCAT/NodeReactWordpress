@@ -27,7 +27,7 @@ export default class AuthenticationController implements IControllerBase {
             setSessionCookie(res, user, rememberMe);
             return res.send({ user, message: "You are now logged", sucess: true });
         }).catch((err: Error) => {
-            return res.status(404).json({ message: err.message })
+            return res.status(401).json({ message: err.message })
         })
     }
 

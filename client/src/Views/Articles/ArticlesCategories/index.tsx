@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import PageTitle from '../../../Components/PageTitle'
 import GeneratedTable from '../../../Components/GeneratedTable'
-import { Grid, Typography, Box } from '@material-ui/core'
+import { Typography, Box } from '@material-ui/core'
 import ArticlesCategoriesForm from './ArticlesCategoriesForm'
 import { FormikHelpers } from 'formik'
 import Axios from 'axios'
+import FormTableLayout from '../../../Layout/FormTableLayout'
 
 interface ArticlesCategoriesState {
-    datas: Array<Object>,
+    datas: Array<{ id: string, value: string, label: string, [key: string]: any }>,
     isLoading: boolean
 }
 
@@ -25,8 +26,9 @@ export default class ArticlesCategories extends Component<{}, ArticlesCategories
     componentDidMount() {
         Axios.get("/api/articles/getAll").then(({ data }) => {
             this.setState({
-                isLoading: false, datas: data.map((e: any) => {
-                    return { name: e.name, description: e.description, inUse: e.inUse };
+                isLoading: false,
+                datas: data.map((e: any) => {
+                    return { id: e._id, label: e.name, value: e._id, description: e.description, inUse: e.inUse };
                 })
             })
         }).catch((err) => {
@@ -40,36 +42,43 @@ export default class ArticlesCategories extends Component<{}, ArticlesCategories
             parentCategorie: values.parentCategorie,
             description: values.description
         }).then(({ data }) => {
-            this.setState({ datas: [{ name: data.name, description: data.description, inUse: 0 }, ...this.state.datas] })
+            this.setState({ datas: [{ id: data._id, label: data.name, value: data._id, description: data.description, inUse: 0 }, ...this.state.datas] }, () => {
+                formikHelper.resetForm();
+            });
         }).catch((err) => {
+            formikHelper.setStatus({ error: 'Error: make sure this name in not already used' });
             console.error(err);
         });
     }
 
     render() {
         return (
-            <div className='articles-categories'>
+            <>
                 <PageTitle text="Catégories" />
-                <Grid container spacing={1}>
-                    <Grid item md={4}>
-                        <Box marginBottom={2} marginRight={2} >
-                            <Typography style={{ fontWeight: 'bold', margin: '1em 0' }} variant='body1'>Ajouter une catégorie</Typography>
-                        </Box>
-                        <ArticlesCategoriesForm onSubmit={this.handleSubmitForm} />
-                    </Grid>
-                    <Grid item md={8}>
+                <FormTableLayout
+                    form={
+                        <>
+                            <Box marginBottom={2} marginRight={2} >
+                                <Typography style={{ fontWeight: 'bold', margin: '1em 0' }} variant='body1'>Ajouter une catégorie</Typography>
+                            </Box>
+                            <ArticlesCategoriesForm onSubmit={this.handleSubmitForm} datas={this.state.datas}
+                            />
+                        </>
+                    }
+                    table={
                         <GeneratedTable
                             columns={[
-                                { label: 'Nom' },
-                                { label: 'Description', width: '15%' },
-                                { label: 'Utilisations', width: '15%' }
+                                { name: 'label', label: 'Nom' },
+                                { name: 'description', label: 'Description', width: '15%' },
+                                { name: 'inUse', label: 'Utilisations', width: '15%' }
                             ]}
                             datas={this.state.datas}
                             isLoading={this.state.isLoading}
                         />
-                    </Grid>
-                </Grid>
-            </div >
+                    }
+
+                />
+            </>
         )
     }
 }
