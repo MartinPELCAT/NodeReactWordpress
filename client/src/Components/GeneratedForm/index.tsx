@@ -54,18 +54,18 @@ export default class GeneratedForm extends Component<GeneratedFormProps> {
                         <FormControl fullWidth variant='outlined' component={Form} noValidate onSubmit={handleSubmit} error={!!errors}>
                             {this.props.fields.map(field => {
                                 return (
-                                    <Box marginRight={2} marginBottom={2} key={field.name} >
+                                    <Box marginBottom={2} key={field.name} >
                                         {this.getGeneratedInput(field, errors, values, handleChange)}
                                     </Box>
                                 )
                             })}
 
                             {!!status.error && (
-                                <Box marginRight={2} marginBottom={2}>
+                                <Box marginBottom={2}>
                                     <Alert color='error' variant='outlined'>{status.error}</Alert>
                                 </Box>
                             )}
-                            <Box marginRight={2} marginBottom={2}>
+                            <Box marginBottom={2}>
                                 <Button color='secondary' variant='contained' type='submit' disableElevation>{this.props.button.label}</Button>
                             </Box>
                         </FormControl>

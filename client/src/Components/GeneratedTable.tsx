@@ -11,7 +11,6 @@ interface ColumnProps {
 interface GeneratedTableProps {
     columns: Array<ColumnProps>,
     datas: Array<object> | null,
-    isLoading: boolean
 }
 
 export default class GeneratedTable extends Component<GeneratedTableProps> {
@@ -50,7 +49,7 @@ export default class GeneratedTable extends Component<GeneratedTableProps> {
                 <Table>
                     <TableHead>
                         <TableRow >
-                            <TableCell padding="checkbox"><Checkbox disabled={this.props.isLoading} /></TableCell>
+                            <TableCell padding="checkbox"><Checkbox disabled={!!!this.props.datas} /></TableCell>
                             {this.props.columns.map((col, i) => {
                                 if (!!col.width) { return <TableCell key={`${col}-${i}`} style={{ width: col.width }}>{col.label}</TableCell> }
                                 return <TableCell key={`${col}-${i}`}>{col.label}</TableCell>
@@ -58,7 +57,7 @@ export default class GeneratedTable extends Component<GeneratedTableProps> {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.isLoading ? this.getSkeleton() : this.getDatas()}
+                        {!!!this.props.datas || this.props.datas.length === 0 ? this.getSkeleton() : this.getDatas()}
                     </TableBody>
                 </Table>
             </TableContainer>

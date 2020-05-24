@@ -8,14 +8,14 @@ export default class ArticleController implements IControllerBase {
     public controllerPath = '/articles';
     public router = Router();
     private ArticleService = ArticleService;
-    
+
     constructor() {
         this.initRoutes();
     }
 
     public initRoutes() {
-        this.router.post('/addCategorie', this.addCategorie.bind(this));
-        this.router.get('/getAll', this.getAllCategories.bind(this));
+        this.router.post('/categorie', this.addCategorie.bind(this));
+        this.router.get('/categories', this.getAllCategories.bind(this));
     }
 
     private addCategorie(req: Request, res: Response) {

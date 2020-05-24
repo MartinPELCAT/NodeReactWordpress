@@ -9,7 +9,7 @@ interface MenuBlockProps {
     icon?: ReactNode,
     opened?: boolean,
     to?: string,
-    menuParrentUrl?: string
+    menuParrentUrl?: string,
 }
 
 interface MenuBlockState {

@@ -11,7 +11,7 @@ import LinksRoutes from '../../Routes/LinksRoutes';
 export default class AdminPage extends Component<RouteComponentProps> {
     render() {
         return (
-            <AdminLayout>
+            <AdminLayout {...this.props}>
                 <CssBaseline />
                 <Suspense fallback={<CircularProgress />}>
                     <Switch>

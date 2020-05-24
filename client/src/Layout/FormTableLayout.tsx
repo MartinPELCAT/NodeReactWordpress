@@ -10,11 +10,11 @@ interface FormTableLayoutProps {
 export default class FormTableLayout extends Component<FormTableLayoutProps> {
     render() {
         return (
-            <Grid container spacing={1}>
-                <Grid item md={4}>
+            <Grid container spacing={2}>
+                <Grid item md={4} xs={12}>
                     {this.props.form}
                 </Grid>
-                <Grid item md={8}>
+                <Grid item md={8} xs={12} >
                     {this.props.table}
                 </Grid>
             </Grid>

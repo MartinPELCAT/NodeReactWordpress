@@ -30,7 +30,6 @@ export default class AllPages extends Component<{}, AllPagesStates> {
                         { name: 'date', label: 'Date', width: '20%' }
                     ]}
                     datas={null}
-                    isLoading={true}
                 />
             </div >
         )

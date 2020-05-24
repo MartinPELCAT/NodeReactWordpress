@@ -24,7 +24,6 @@ export default class LinksCategories extends Component {
                                 { name: 'links', label: 'Liens', width: '15%' }
                             ]}
                             datas={null}
-                            isLoading={true}
                         />
                     </Grid>
                 </Grid>

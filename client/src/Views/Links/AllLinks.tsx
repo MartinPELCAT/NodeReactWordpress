@@ -31,7 +31,6 @@ export default class AllLinks extends Component<{}, AllLinksStates> {
                         { name: 'inUse', label: 'Utilisation', width: '10%' }
                     ]}
                     datas={null}
-                    isLoading={true}
                 />
             </div >
         )

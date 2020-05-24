@@ -27,7 +27,6 @@ export default class ArticlesTags extends Component {
                                 { name: 'inUse', label: 'Utilisations', width: '15%' }
                             ]}
                             datas={null}
-                            isLoading={true}
                         />
                     }
                 />

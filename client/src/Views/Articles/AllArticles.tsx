@@ -32,7 +32,6 @@ export default class AllArticles extends Component<{}, AllArticlesStates> {
                         { name: 'date', label: 'Date', width: '10%' }
                     ]}
                     datas={null}
-                    isLoading={true}
                 />
             </div >
         )

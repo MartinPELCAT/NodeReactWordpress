@@ -9,7 +9,6 @@ import FormTableLayout from '../../../Layout/FormTableLayout'
 
 interface ArticlesCategoriesState {
     datas: Array<{ id: string, value: string, label: string, [key: string]: any }>,
-    isLoading: boolean
 }
 
 export default class ArticlesCategories extends Component<{}, ArticlesCategoriesState> {
@@ -18,16 +17,14 @@ export default class ArticlesCategories extends Component<{}, ArticlesCategories
         super(props);
         this.state = {
             datas: [],
-            isLoading: true
         }
         this.handleSubmitForm = this.handleSubmitForm.bind(this);
     }
 
     componentDidMount() {
-        Axios.get("/api/articles/getAll").then(({ data }) => {
+        Axios.get("/api/articles/categories").then(({ data }) => {
             this.setState({
-                isLoading: false,
-                datas: data.map((e: any) => {
+                datas: data.map((e: any): { id: string, value: string, label: string, [key: string]: any } => {
                     return { id: e._id, label: e.name, value: e._id, description: e.description, inUse: e.inUse };
                 })
             })
@@ -37,7 +34,7 @@ export default class ArticlesCategories extends Component<{}, ArticlesCategories
     }
 
     handleSubmitForm(values: { name: string, parentCategorie: string, description: string }, formikHelper: FormikHelpers<any>) {
-        Axios.post("/api/articles/addCategorie", {
+        Axios.post("/api/articles/categorie", {
             name: values.name,
             parentCategorie: values.parentCategorie,
             description: values.description
@@ -73,7 +70,6 @@ export default class ArticlesCategories extends Component<{}, ArticlesCategories
                                 { name: 'inUse', label: 'Utilisations', width: '15%' }
                             ]}
                             datas={this.state.datas}
-                            isLoading={this.state.isLoading}
                         />
                     }
 
