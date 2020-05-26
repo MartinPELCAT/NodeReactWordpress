@@ -7,7 +7,7 @@ class AuthenticationService {
     private userDAO = UserDAO;
     public getCurrentUser(): Promise<IUser | null> {
         return new Promise((resolve, reject) => {
-            //TODO
+            //TODO return current user if connected
         });
     }
 

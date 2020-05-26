@@ -5,6 +5,7 @@ import { FormControl, Box, Button } from '@material-ui/core'
 import GeneratedTextField from './GeneratedTextField'
 import GeneratedSelectField from './GeneratedSelectField'
 import { Alert } from '@material-ui/lab'
+import GeneratedCheckBoxField from './GeneratedCheckBoxField'
 
 export default class GeneratedForm extends Component<GeneratedFormProps> {
 
@@ -29,6 +30,15 @@ export default class GeneratedForm extends Component<GeneratedFormProps> {
                     field={field}
                     handleChange={handleChange}
                     datas={field.type.datas}
+                />
+            case 'checkbox':
+                return <GeneratedCheckBoxField
+                    checkboxProps={field.type.props}
+                    key={field.name}
+                    errors={errors}
+                    values={values}
+                    field={field}
+                    handleChange={handleChange}
                 />
             default:
                 return <></>;

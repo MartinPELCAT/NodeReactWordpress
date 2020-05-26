@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Button, Col, Container, Spinner, Alert } from 'react-bootstrap';
-import { Formik, FormikHelpers } from 'formik';
+import { Container } from 'react-bootstrap';
+import { FormikHelpers } from 'formik';
 import { object, string, boolean } from 'yup';
 import './login.scss';
 import Axios from "axios";
@@ -8,6 +8,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { SessionContext } from "../../Contexts/SessionContext";
 import { ISessionContext } from "../../Contexts/SessionContext/SessionBeans";
 import { redirectTo } from "../../Utils/RouteUtils";
+import GeneratedForm from "../../Components/GeneratedForm";
 
 const schema = object({
     email: string().required().email(),
@@ -38,7 +39,7 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
                 this.setState({ submitLogin: false });
                 this.props.history.push(redirectTo(this.props.location));
             }).catch(() => {
-                actions.setStatus({ apiCall: "Identifiant ou mot de passe incorrect" })
+                actions.setStatus({ error: "Identifiant ou mot de passe incorrect" })
                 this.setState({ submitLogin: false });
             })
     }
@@ -47,82 +48,47 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
         return (
             <div className='login-page'>
                 <Container>
-                    <Formik
-                        validationSchema={schema}
-                        onSubmit={this.handleSubmit}
-                        initialValues={{
-                            email: '',
-                            password: '',
-                            rememberMe: false
-                        }}
-                        initialStatus={{
-                            apiCall: '',
-                        }}
-                    >
-                        {({
-                            handleSubmit,
-                            handleChange,
-                            values,
-                            errors,
-                            status,
-                        }) =>
-                            (
-                                <div className='login'>
-                                    <Form noValidate onSubmit={handleSubmit} className="mx-auto login-form">
-                                        <Form.Row>
-                                            <Form.Group as={Col} controlId="login-email">
-                                                <Form.Label>Email</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    name="email"
-                                                    value={values.email}
-                                                    onChange={handleChange}
-                                                    isInvalid={!!errors.email}
-                                                />
-                                                <Form.Control.Feedback type="invalid">
-                                                    {errors.email}
-                                                </Form.Control.Feedback>
-                                            </Form.Group>
-                                        </Form.Row>
-                                        <Form.Row>
-                                            <Form.Group as={Col} controlId="login-password">
-                                                <Form.Label>Password</Form.Label>
-                                                <Form.Control
-                                                    type="password"
-                                                    name="password"
-                                                    value={values.password}
-                                                    onChange={handleChange}
-                                                    isInvalid={!!errors.password}
-                                                />
-                                                <Form.Control.Feedback type="invalid">
-                                                    {errors.password}
-                                                </Form.Control.Feedback>
-                                            </Form.Group>
-                                        </Form.Row>
-                                        <Form.Row>
-                                            <Form.Group as={Col} controlId="login-rememberMe">
-                                                <Form.Check type='checkbox' label="Keep me in" onChange={handleChange} name="rememberMe" />
-                                            </Form.Group>
-                                        </Form.Row>
-                                        {!!status.apiCall && <Alert variant='danger' >{status.apiCall}</Alert>}
-                                        <Form.Row>
-                                            <Form.Group as={Col}>
-                                                <Button type="submit" block> {!this.state.submitLogin ?
-                                                    'Log in' :
-                                                    <Spinner
-                                                        as="span"
-                                                        animation="border"
-                                                        size="sm"
-                                                        role="status"
-                                                        aria-hidden="true"
-                                                    />}</Button>
-                                            </Form.Group>
-                                        </Form.Row>
-                                    </Form>
-                                </div>
-                            )
-                        }
-                    </Formik>
+                    <div className='login '>
+                        <div className="login-form">
+                            <GeneratedForm
+                                schema={schema}
+                                button={{
+                                    label: 'Log in'
+                                }}
+                                initialValues={{
+                                    email: '',
+                                    password: '',
+                                    rememberMe: false
+                                }}
+                                fields={[
+                                    {
+                                        name: 'email',
+                                        label: "Email",
+                                        type: {
+                                            input: 'text'
+                                        }
+                                    }, {
+                                        name: 'password',
+                                        label: "Mot de passe",
+                                        type: {
+                                            input: 'text',
+                                            props: {
+                                                type: 'password'
+                                            }
+                                        }
+                                    }, {
+                                        name: 'rememberMe',
+                                        label: "Keep me in",
+                                        type: {
+                                            input: 'checkbox'
+                                        }
+                                    }
+                                ]}
+
+                                onSubmit={this.handleSubmit}
+                            />
+                        </div>
+                    </div>
                 </Container>
             </div>
         )

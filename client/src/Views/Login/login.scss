@@ -21,3 +21,7 @@
 #root > .login-page {
     background-color: #e9eff3;
 }
+
+.login-form form div:last-child {
+    margin-bottom: 0px !important;
+}
