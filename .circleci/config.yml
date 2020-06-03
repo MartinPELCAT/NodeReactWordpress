@@ -10,7 +10,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: cd ./client && npm install
-            - run: npm run build
+            - run: cd ./client && npm run build
   build-server:
     executor:
       name: node/default
@@ -19,7 +19,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: cd ./server && npm install
-            - run: npm run build
+            - run: cd ./server && npm run build
 workflows:
     build-server-client:
       jobs:
