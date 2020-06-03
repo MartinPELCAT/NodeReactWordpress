@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: cd /client && npm install
+            - run: cd ./client && npm install
             - run: npm run build
   build-server:
     executor:
@@ -18,7 +18,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: cd /server && npm install
+            - run: cd ./server && npm install
             - run: npm run build
 workflows:
     build-server-client:
