@@ -5,9 +5,9 @@ jobs:
   build-client:
     executor:
       name: node/default
+    - working_directory: ~/client
     steps:
       - checkout
-        path: ~/client
       - node/with-cache:
           steps:
             - run: npm install
@@ -15,9 +15,9 @@ jobs:
   build-server:
     executor:
       name: node/default
+    - working_directory: ~/server
     steps:
       - checkout
-        path: ~/server
       - node/with-cache:
           steps:
             - run: npm install
