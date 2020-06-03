@@ -7,9 +7,9 @@ jobs:
       name: node/default
     steps:
       - checkout
+      - cd ./client
       - node/with-cache:
           steps:
-            - run: cd ./client
             - run: npm install
             - run: npm run build
   build-server:
@@ -17,9 +17,9 @@ jobs:
       name: node/default
     steps:
       - checkout
+      - cd ./server
       - node/with-cache:
           steps:
-            - run: cd ./server
             - run: npm install
             - run: npm run build
 workflows:
