@@ -7,7 +7,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - cd ./client
+        path: ~/client
       - node/with-cache:
           steps:
             - run: npm install
@@ -17,7 +17,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - cd ./server
+        path: ~/server
       - node/with-cache:
           steps:
             - run: npm install
