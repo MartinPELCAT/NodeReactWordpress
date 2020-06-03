@@ -5,22 +5,20 @@ jobs:
   build-client:
     executor:
       name: node/default
-    - working_directory: ~/client
     steps:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install
+            - run: cd /client && npm install
             - run: npm run build
   build-server:
     executor:
       name: node/default
-    - working_directory: ~/server
     steps:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install
+            - run: cd /server && npm install
             - run: npm run build
 workflows:
     build-server-client:
